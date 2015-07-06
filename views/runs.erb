@@ -1,0 +1,46 @@
+<div id='map'></div>
+
+<script>
+    L.mapbox.accessToken = 'pk.eyJ1IjoiYmFyc3Vrb3YiLCJhIjoiTGE4SjZUUSJ9.GlJoUBEGTTNJVltire9ZXA';
+    var map = L.mapbox.map('map', 'barsukov.ef038316')
+            .setView([55.626098, 12.568337], 14);
+
+    map._initPathRoot();
+
+    var svg = d3.select("#map").select("svg"),
+            g = svg.append("g");
+
+    var path = d3.geo.path().projection(function(e) {
+        console.log(e)
+        var point = map.latLngToLayerPoint(new L.LatLng(e[1],e[0]));
+        return [point.x,point.y];
+    });
+
+    d3.json('/workout/10', function(d){
+        function transition(p) {
+            p.transition()
+                    .duration(2000)
+                    .attrTween("stroke-dasharray", tweenDash);
+        }
+
+        function tweenDash() {
+            var l = feature.node().getTotalLength();
+            var i = d3.interpolateString("0," + l, l + "," + l);
+            return function(t) {
+                return i(t)
+            }
+        }
+
+        var feature = g.append("path")
+                .datum(d)
+                .attr('id', 'path_10')
+                .attr("d",path)
+                .call(transition);
+
+        map.on("viewreset", function() {
+            feature.attr({"d":path,
+            'stroke-dasharray': ''})
+        });
+
+    })
+</script>
