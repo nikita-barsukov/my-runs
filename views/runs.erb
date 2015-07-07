@@ -33,13 +33,17 @@
 
         var feature = g.append("path")
                 .datum(d)
-                .attr('id', 'path_10')
-                .attr("d",path)
+                .attr({
+                    "id": "path_10",
+                    "d":path
+                })
                 .call(transition);
 
         map.on("viewreset", function() {
-            feature.attr({"d":path,
-            'stroke-dasharray': ''})
+            feature.attr({
+                "d":path,
+                "stroke-dasharray": ''
+            })
         });
 
     })

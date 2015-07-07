@@ -8,6 +8,7 @@ Sources:
 =============
 
 http://zevross.com/blog/2014/09/30/use-the-amazing-d3-library-to-animate-a-path-on-a-leaflet-map/
+http://big-elephants.com/2014-06/unrolling-line-charts-d3js/
 
 other stuff:
 -----------
