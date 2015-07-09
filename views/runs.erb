@@ -1,9 +1,35 @@
-<div id='map'></div>
+<!doctype html>
 
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+    <script src="//api.tiles.mapbox.com/mapbox.js/v2.2.1/mapbox.js"></script>
+    <script src="//api.tiles.mapbox.com/mapbox.js/plugins/turf/v2.0.0/turf.min.js"></script>
+    <script src="http://d3js.org/queue.v1.min.js"></script>
+    <script src="running_route.js"></script>
+    <link href='https://api.tiles.mapbox.com/mapbox.js/v2.2.1/mapbox.css' rel='stylesheet' />
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+        path {
+            stroke: red;
+            fill:none;
+            stroke-width: 2px;
+        }
+    </style>
+</head>
+<body>
+<div id="main" class='container'>
+    <div id="map"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script>
     L.mapbox.accessToken = 'pk.eyJ1IjoiYmFyc3Vrb3YiLCJhIjoiTGE4SjZUUSJ9.GlJoUBEGTTNJVltire9ZXA';
     var map = L.mapbox.map('map', 'barsukov.ef038316')
-            .setView([55.626098, 12.568337], 14);
+            .setView([55.626098, 12.568337], 13);
 
     map._initPathRoot();
 
@@ -11,40 +37,22 @@
             g = svg.append("g");
 
     var path = d3.geo.path().projection(function(e) {
-        console.log(e)
         var point = map.latLngToLayerPoint(new L.LatLng(e[1],e[0]));
         return [point.x,point.y];
     });
 
-    d3.json('/workout/10', function(d){
-        function transition(p) {
-            p.transition()
-                    .duration(2000)
-                    .attrTween("stroke-dasharray", tweenDash);
-        }
+    queue()
+            .defer(d3.json, '/workout/54')
+            .defer(d3.json, '/workout/43')
+            .await(function(error, d1, d2){
+                draw_map(d1, 5000, true);
+                setTimeout(function(){
+                    draw_map(d2, 2000, true)
+                }, 5000)
+            });
 
-        function tweenDash() {
-            var l = feature.node().getTotalLength();
-            var i = d3.interpolateString("0," + l, l + "," + l);
-            return function(t) {
-                return i(t)
-            }
-        }
-
-        var feature = g.append("path")
-                .datum(d)
-                .attr({
-                    "id": "path_10",
-                    "d":path
-                })
-                .call(transition);
-
-        map.on("viewreset", function() {
-            feature.attr({
-                "d":path,
-                "stroke-dasharray": ''
-            })
-        });
-
-    })
 </script>
+</body>
+</html>
+
+
