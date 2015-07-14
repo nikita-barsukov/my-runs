@@ -1,7 +1,8 @@
 
 function draw_map(d, t, pan){
+    gjson = JSON.parse(d['geojson'])
     d3.selectAll("#path_" + d['id']).remove()
-    c = turf.centroid(d['geojson'])['geometry']['coordinates'];
+    c = turf.centroid(gjson)['geometry']['coordinates'];
     if(pan){
         map.panTo(new L.LatLng(c[1], c[0]))
     }
@@ -21,7 +22,7 @@ function draw_map(d, t, pan){
     }
 
     var feature = g.append("path")
-        .datum(d['geojson'])
+        .datum(gjson)
         .attr({
             "id": "path_" + d['id'],
             "d":path
