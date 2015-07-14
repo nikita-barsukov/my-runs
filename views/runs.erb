@@ -7,29 +7,28 @@
     <script src="//api.tiles.mapbox.com/mapbox.js/v2.2.1/mapbox.js"></script>
     <script src="//api.tiles.mapbox.com/mapbox.js/plugins/turf/v2.0.0/turf.min.js"></script>
     <script src="http://d3js.org/queue.v1.min.js"></script>
-    <script src="running_route.js"></script>
     <link href='https://api.tiles.mapbox.com/mapbox.js/v2.2.1/mapbox.css' rel='stylesheet' />
-    <style>
-        body { margin:0; padding:0; }
-        #map { position:absolute; top:0; bottom:0; width:100%; }
-        path {
-            stroke: red;
-            fill:none;
-            stroke-width: 2px;
-        }
-    </style>
+    <link href="style.css" rel="stylesheet" />
 </head>
 <body>
 <div id="main" class='container'>
+    <div class="screen" id="screen_1">
+        <p>In may I completed my second marathon. I ran 42K on a sunny day in Copenhagen.</p>
+        <p>This is how I trained to complete it.</p>
+    </div>
+    <div class="screen" id="screen_2">
+        <p>I started rather slow. I ran only around 6-7 km per run during my first week. First run that as longer than 10 km was during second week of training.</p>
+    </div>
     <div id="map"></div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="helpers.js"></script>
+<script src="screens.js"></script>
 <script>
     L.mapbox.accessToken = 'pk.eyJ1IjoiYmFyc3Vrb3YiLCJhIjoiTGE4SjZUUSJ9.GlJoUBEGTTNJVltire9ZXA';
-    var map = L.mapbox.map('map', 'barsukov.ef038316')
-            .setView([55.626098, 12.568337], 13);
+    var map = L.mapbox.map('map', 'barsukov.ef038316', {zoomControl:false })
+            .setView([55.636098, 12.568337], 13);
 
     map._initPathRoot();
 
@@ -40,16 +39,14 @@
         var point = map.latLngToLayerPoint(new L.LatLng(e[1],e[0]));
         return [point.x,point.y];
     });
+    $(document).ready(function(){
+        show_screen_1();
+        $('body' ).click(function() {
+            show_screen_2()
+        });
+    })
 
-    queue()
-            .defer(d3.json, '/workout/54')
-            .defer(d3.json, '/workout/43')
-            .await(function(error, d1, d2){
-                draw_map(d1, 5000, true);
-                setTimeout(function(){
-                    draw_map(d2, 2000, true)
-                }, 5000)
-            });
+
 
 </script>
 </body>

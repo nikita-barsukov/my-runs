@@ -1,0 +1,21 @@
+body { margin:0; padding:0; }
+#map { position:absolute; top:0; bottom:0; width:100%; }
+path {
+    stroke: red;
+    fill:none;
+    stroke-width: 2px;
+}
+
+.screen {
+    display: none;
+    position: absolute;
+    max-width: 500px;
+    background-color: white;
+    top: 30%;
+    left: 30%;
+    z-index: 1000;
+    transform: translate(-70%, -70%);
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 5px;
+}

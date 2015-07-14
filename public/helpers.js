@@ -33,3 +33,8 @@ function draw_map(d, t, pan){
         })
     })
 }
+
+function show_screen(number) {
+    $(".screen").fadeOut(2000)
+    $("#screen_" + number).fadeIn(3000);
+}
