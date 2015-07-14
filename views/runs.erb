@@ -19,6 +19,10 @@
     <div class="screen" id="screen_2">
         <p>I started rather slow. I ran only around 6-7 km per run during my first week. First run that as longer than 10 km was during second week of training.</p>
     </div>
+    <div class="screen" id="screen_3">
+        <p>Then I started interval trainings that were tough. I ran familiar routes this time and focusing on improving my tempo.</p>
+        <p>And then my toughest run happened: 20K along the sea during a storm. That was extreme!</p>
+    </div>
     <div id="map"></div>
 </div>
 
@@ -39,11 +43,37 @@
         var point = map.latLngToLayerPoint(new L.LatLng(e[1],e[0]));
         return [point.x,point.y];
     });
+    SCREEN_NUMBER = 1;
+    MAX_SCREENS = 3
     $(document).ready(function(){
-        show_screen_1();
+         window["show_screen_" + SCREEN_NUMBER]()
         $('body' ).click(function() {
-            show_screen_2()
+            if(SCREEN_NUMBER < MAX_SCREENS){
+                SCREEN_NUMBER +=1
+                window["show_screen_" + SCREEN_NUMBER]()
+            }
+
         });
+        $(document).keydown(function(e) {
+            switch(e.which) {
+                case 37:
+                    if(SCREEN_NUMBER > 1){
+                        SCREEN_NUMBER = SCREEN_NUMBER - 1
+                        window["show_screen_" + SCREEN_NUMBER]()
+                    }
+                    e.preventDefault();
+                    break;
+                case 39:
+                    if(SCREEN_NUMBER < MAX_SCREENS){
+                        SCREEN_NUMBER = SCREEN_NUMBER + 1
+                        window["show_screen_" + SCREEN_NUMBER]()
+                    }
+                    e.preventDefault();
+                    break;
+                default: return
+            }
+        });
+
     })
 
 

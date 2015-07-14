@@ -1,5 +1,6 @@
 
 function draw_map(d, t, pan){
+    d3.selectAll("#path_" + d['id']).remove()
     c = turf.centroid(d['geojson'])['geometry']['coordinates'];
     if(pan){
         map.panTo(new L.LatLng(c[1], c[0]))
@@ -7,7 +8,8 @@ function draw_map(d, t, pan){
     function transition(p) {
         p.transition()
             .duration(t)
-            .attrTween("stroke-dasharray", tweenDash);
+            .attrTween("stroke-dasharray", tweenDash)
+            .style("stroke-opacity", 0.4);
     }
 
     function tweenDash() {
@@ -24,6 +26,7 @@ function draw_map(d, t, pan){
             "id": "path_" + d['id'],
             "d":path
         })
+        .style("stroke-opacity", 1)
         .call(transition);
 
     map.on("viewreset", function() {
