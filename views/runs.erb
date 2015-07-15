@@ -12,22 +12,29 @@
 </head>
 <body>
 <div id="main" class='container'>
-    <div class="screen" id="screen_1">
-        <p>In may I completed my second marathon. I ran 42K on a sunny day in Copenhagen.</p>
-        <p>This is how I trained to complete it.</p>
-    </div>
-    <div class="screen" id="screen_2">
-        <p>I started rather slow. I ran only around 6-7 km per run during my first week. First run that as longer than 10 km was during second week of training.</p>
-    </div>
-    <div class="screen" id="screen_3">
-        <p>Then I started interval trainings that were tough. I ran familiar routes this time and focusing on improving my tempo.</p>
-        <p>And then my toughest run happened: 20K along the sea during a storm. That was extreme!</p>
+    <div id="legend">
+        <div class="screen" id="screen_1">
+            <p>In may I completed my second marathon. I ran 42K on a sunny day in Copenhagen.</p>
+            <p>This is how I trained to complete it.</p>
+        </div>
+        <div class="screen" id="screen_2">
+            <p>I started rather slow. I ran only around 6-7 km per run during my first week. First run that as longer than 10 km was during second week of training.</p>
+        </div>
+        <div class="screen" id="screen_3">
+            <p>Then I started interval trainings that were tough. I ran familiar routes this time and focusing on improving my tempo.</p>
+            <p>And then my toughest run happened: 20K along the sea during a storm. That was extreme!</p>
+        </div>
+        <div id="scatterplot">
+
+        </div>
     </div>
     <div id="map"></div>
 </div>
+<div id="tooltip"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="helpers.js"></script>
+<script src="scatterplot.js"></script>
 <script src="screens.js"></script>
 <script>
     L.mapbox.accessToken = 'pk.eyJ1IjoiYmFyc3Vrb3YiLCJhIjoiTGE4SjZUUSJ9.GlJoUBEGTTNJVltire9ZXA';
@@ -38,6 +45,41 @@
 
     var svg = d3.select("#map").select("svg"),
             g = svg.append("g");
+    var margin_scplt = {top: 5, right: 0, bottom: 25, left: 20}
+    var width = 400 - margin_scplt.left - margin_scplt.right,
+            height = 400 -  margin_scplt.top -  margin_scplt.bottom;
+    console.log(margin_scplt)
+    var scatterplot = d3.select('#scatterplot').append('svg')
+            .attr("width", width + margin_scplt['left'] + margin_scplt['right'])
+            .attr("height", height + margin_scplt['top'] + margin_scplt['bottom'])
+            .append("g")
+            .attr("transform", "translate(" + margin_scplt.left + "," + margin_scplt.top + ")");
+
+    var x_scale_func = d3.scale.linear()
+            .range([0, width])
+            .domain([0,45]);
+
+    var y_scale_func = d3.scale.linear()
+            .range([height, 0])
+            .domain([9, 12]);
+
+    var x_axis = d3.svg.axis()
+            .scale(x_scale_func)
+            .orient("bottom");
+
+    var y_axis = d3.svg.axis()
+            .scale(y_scale_func)
+            .orient("left");
+
+    scatterplot.append("g")
+            .attr("class", "x axis")
+            .attr("transform", "translate(" + margin_scplt.left + "," + (height + margin_scplt.top) + ")")
+            .call(x_axis)
+
+    scatterplot.append("g")
+            .attr("class", "y axis")
+            .call(y_axis)
+            .attr("transform", "translate(" + margin_scplt.left + "," + margin_scplt.top + ")")
 
     var path = d3.geo.path().projection(function(e) {
         var point = map.latLngToLayerPoint(new L.LatLng(e[1],e[0]));
@@ -75,9 +117,6 @@
         });
 
     })
-
-
-
 </script>
 </body>
 </html>

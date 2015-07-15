@@ -25,6 +25,7 @@ function draw_map(d, t, pan){
         .datum(gjson)
         .attr({
             "id": "path_" + d['id'],
+            'class': 'route',
             "d":path
         })
         .style("stroke-opacity", 1)
@@ -39,6 +40,5 @@ function draw_map(d, t, pan){
 }
 
 function show_screen(number) {
-    $(".screen").fadeOut(2000)
-    $("#screen_" + number).fadeIn(3000);
+    $(".screen").fadeOut(function(){ $("#screen_" + number).fadeIn(); });
 }
