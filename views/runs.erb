@@ -13,24 +13,37 @@
 <body>
 <div id="main" class='container'>
     <div id="legend">
-        <div class="screen" id="screen_1">
-            <p>In may I completed my second marathon. I ran 42K on a sunny day in Copenhagen.</p>
-            <p>This is how I trained to complete it.</p>
-        </div>
-        <div class="screen" id="screen_2">
-            <p>I started rather slow. I ran only around 6-7 km per run during my first week. First run that as longer than 10 km was during second week of training.</p>
-        </div>
-        <div class="screen" id="screen_3">
-            <p>Then I started interval trainings that were tough. I ran familiar routes this time and focusing on improving my tempo.</p>
-            <p>And then my toughest run happened: 20K along the sea during a storm. That was extreme!</p>
-        </div>
-        <div id="scatterplot">
-
-        </div>
+        <div id="screen_content"></div>
+        <div id="scatterplot"></div>
     </div>
     <div id="map"></div>
 </div>
 <div id="tooltip"></div>
+<div id="screens">
+    <div id="screen_1">
+        <p>In may I completed my second marathon. I ran 42K on a sunny day in Copenhagen.</p>
+        <p>This is how I trained to complete it.</p>
+    </div>
+    <div id="screen_2">
+        <p>I started rather slow. I ran only around 6-7 km per run during my first week. First run that as longer than 10 km was during second week of training.</p>
+    </div>
+    <div id="screen_3">
+        <p>Then I started interval trainings that were tough. I ran familiar routes this time and focusing on improving my tempo.</p>
+        <p>And then my toughest run happened: 20K along the sea during a storm. That was extreme!</p>
+    </div>
+    <div id="screen_4">
+        <p>I gradually increased my weekly distance and intervals. I ran 30+ km fot two consecutive days, and finally I broke 25 km. </p>
+    </div>
+    <div id="screen_5">
+        <p>Finally the 30 km run happened, which I survived. </p>
+    </div>
+    <div id="screen_6">
+        <p>Then I had a break and decided to take it easy. Also I started running slightly different routes.</p>
+    </div>
+    <div id="screen_8">
+        <p>Last couple of weeks before the marathon. No longer runs and an off-site 13 km in Malmo with a friend.</p>
+    </div>
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="helpers.js"></script>
@@ -61,7 +74,7 @@
 
     var y_scale_func = d3.scale.linear()
             .range([height, 0])
-            .domain([9, 12]);
+            .domain([9, 11.5]);
 
     var x_axis = d3.svg.axis()
             .scale(x_scale_func)
@@ -86,7 +99,7 @@
         return [point.x,point.y];
     });
     SCREEN_NUMBER = 1;
-    MAX_SCREENS = 3
+    MAX_SCREENS = 8
     $(document).ready(function(){
          window["show_screen_" + SCREEN_NUMBER]()
         $('body' ).click(function() {

@@ -4,7 +4,7 @@ function draw_map(d, t, pan){
     d3.selectAll("#path_" + d['id']).remove()
     c = turf.centroid(gjson)['geometry']['coordinates'];
     if(pan){
-        map.panTo(new L.LatLng(c[1], c[0]))
+        map.panTo(new L.LatLng(c[1], c[0]), {animate: true})
     }
     function transition(p) {
         p.transition()
@@ -40,5 +40,6 @@ function draw_map(d, t, pan){
 }
 
 function show_screen(number) {
-    $(".screen").fadeOut(function(){ $("#screen_" + number).fadeIn(); });
+    $("#screen_content").empty()
+    $("#screen_content").html($("#screen_" + number).html());
 }

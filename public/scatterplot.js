@@ -1,20 +1,31 @@
 function add_to_scatterplot(d, ttip_text) {
+    var fill_color = ttip_text ? "#1e803d" : "black"
     var circle = scatterplot.append("circle")
-        .attr("r",5)
-        .attr("cx",x_scale_func(d['distance']))
-        .attr("cy",y_scale_func(d['avg_speed']))
+        .attr({
+            "fill": "white",
+            "r":5,
+            "cx": x_scale_func(d['distance']),
+            "cy":y_scale_func(d['avg_speed'])
+        });
+     circle.transition()
+        .duration(2000)
+        .attr({
+            'fill': fill_color
+        })
 
     if(ttip_text){
-        var tooltip = $("#tooltip")
-        circle.attr('class', 'important')
+        var tooltip = d3.select("#tooltip")
+        console.log(circle)
         circle.on("mouseover", function(d){
-                tooltip.css("display", "block");
-                tooltip.html(ttip_text);
-                tooltip.css("top", (d3.event.pageY - 20)+"px")
-                    .css("left",(d3.event.pageX + 10)+"px");
+            tooltip.html(ttip_text);
+            tooltip.style({
+                "display":"block",
+                "top":(d3.event.pageY - 20)+"px",
+                "left":(d3.event.pageX + 10)+"px"});
             })
             .on("mouseout", function(d){
-                tooltip.css("display", "none");
+                tooltip.style("display", "none");
                 tooltip.empty();
-            });       }
+            });
+    }
 }

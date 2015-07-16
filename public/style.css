@@ -9,9 +9,6 @@ body { margin:0; padding:0; }
 .tick text{
     font-size: 8pt;
 }
-circle.important{
-    fill: #1e803d;
-}
 .route {
     fill:none;
     stroke: red;
@@ -24,7 +21,8 @@ circle.important{
     border-radius: 5px;
     border: 2px solid gray;
     z-index: 1000;
-
+    max-width: 200px;
+    padding: 3px;
 }
 #legend {
     top: 5%;
@@ -34,9 +32,11 @@ circle.important{
     position: absolute;
     z-index: 1000;
 }
+#screens, #scatterplot {
+    display: none
+}
 
-.screen, #scatterplot {
-    display: none;
+#screen_content, #scatterplot {
     border: 1px solid black;
     border-radius: 3px;
     padding: 5px;
@@ -45,9 +45,6 @@ circle.important{
 
 }
 
-#scatterplot{
-
-}
-.screen {
+#screen_content {
     height: 150px;
 }
