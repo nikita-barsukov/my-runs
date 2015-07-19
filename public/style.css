@@ -75,6 +75,13 @@ progress{
 }
 
 #logo h1{
-    font-size: 14pt;
+    font-size: 13pt;
     margin: 4px 0px 5px 0px;
+}
+
+h1, h2, h3, h4 {
+    font-family:'Pontif LP W01 Regular', serif;
+}
+p, li {
+    font-family: 'Verdana', sans-serif;
 }
