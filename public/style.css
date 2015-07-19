@@ -24,7 +24,7 @@ body { margin:0; padding:0; }
     padding: 3px;
 }
 #legend {
-    top: 5%;
+    top: 0%;
     left: 3%;
     /*transform: translate(-80%, -80%);*/
     width: 420px;
@@ -35,15 +35,46 @@ body { margin:0; padding:0; }
     display: none
 }
 
-#screen_content, #scatterplot {
+#screen_content, #scatterplot, #logo li {
+    list-style-type: none;
     border: 1px solid black;
     border-radius: 3px;
     padding: 5px;
-    margin-top: 5px;
+    margin: 5px;
     background-color: white;
 
 }
 
 #screen_content {
-    height: 150px;
+    height: 180px;
+}
+
+progress{
+    position: absolute;
+    z-index: 1000;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+#logo ul {
+    margin-bottom: 0;
+    padding-left: 0;
+}
+#logo li {
+    display: inline-block;
+}
+
+#logo a {
+    font-size: 36pt;
+    font-style: normal;
+    text-decoration: none;
+}
+
+.h1 {
+    width: 60%;
+}
+
+#logo h1{
+    font-size: 14pt;
+    margin: 4px 0px 5px 0px;
 }

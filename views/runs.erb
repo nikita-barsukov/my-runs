@@ -13,10 +13,20 @@
 <body>
 <div id="main" class='container'>
     <div id="legend">
+        <div id="logo" >
+            <ul>
+                <li><a href="http://barsukov.net">Б</a></li>
+                <li><a href="mailto:nikita@barsukov.net">@</a></li>
+                <li class="h1"><h1>Preparing to Copenhagen Marathon</h1></li>
+            </ul>
+
+        </div>
         <div id="screen_content"></div>
         <div id="scatterplot"></div>
     </div>
+    <progress max="100" value="0"></progress>
     <div id="map"></div>
+
 </div>
 <div id="tooltip"></div>
 <div id="screens">
@@ -92,24 +102,27 @@
     SCREEN_NUMBER = 1;
     MAX_SCREENS = 8
     $(document).ready(function(){
-         window["show_screen_" + SCREEN_NUMBER]()
+         window["show_screen_" + SCREEN_NUMBER]();
+        $("progress").val(100 * SCREEN_NUMBER / MAX_SCREENS);
         $(document).keydown(function(e) {
             switch(e.which) {
                 case 37:
                     if(SCREEN_NUMBER > 1){
-                        SCREEN_NUMBER = SCREEN_NUMBER - 1
-                        window["show_screen_" + SCREEN_NUMBER]()
+                        SCREEN_NUMBER = SCREEN_NUMBER - 1;
+                        window["show_screen_" + SCREEN_NUMBER]();
+                        $("progress").val(100 * SCREEN_NUMBER / MAX_SCREENS);
                     }
                     e.preventDefault();
                     break;
                 case 39:
                     if(SCREEN_NUMBER < MAX_SCREENS){
-                        SCREEN_NUMBER = SCREEN_NUMBER + 1
-                        window["show_screen_" + SCREEN_NUMBER]()
+                        SCREEN_NUMBER = SCREEN_NUMBER + 1;
+                        window["show_screen_" + SCREEN_NUMBER]();
+                        $("progress").val(100 * SCREEN_NUMBER / MAX_SCREENS);
                     }
                     e.preventDefault();
                     break;
-                default: return
+                default: return;
             }
         });
 

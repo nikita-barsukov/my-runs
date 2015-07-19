@@ -1,5 +1,6 @@
 
 function show_screen(number) {
+    $("#next").remove();
     $("#screen_content").empty();
     $("#screen_content").html($("#screen_" + number).html());
 }
@@ -22,3 +23,17 @@ var x_axis = d3.svg.axis()
 var y_axis = d3.svg.axis()
     .scale(y_scale_func)
     .orient("left");
+
+function add_next(timeout) {
+    setTimeout(function(){
+        $('#screen_content').append('<p id="next"><a href="#">Next</a></p>');
+        $("#next").click(function(e){
+            if(SCREEN_NUMBER < MAX_SCREENS){
+                SCREEN_NUMBER = SCREEN_NUMBER + 1;
+                window["show_screen_" + SCREEN_NUMBER]();
+                $("progress").val(100 * SCREEN_NUMBER / MAX_SCREENS);
+            }
+            e.preventDefault();
+        });
+    }, timeout);
+}

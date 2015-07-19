@@ -1,15 +1,17 @@
 function show_screen_1(){
     show_screen(1);
+    add_next(500);
 }
 function show_screen_2(){
     $("#scatterplot").fadeIn()
     show_screen(2);
     [10,1,2,3,4].forEach(function(id){
         d3.json('/workout/' + id, function(d){
-            draw_map(d, 5000, false)
+            draw_map(d, 5000, false);
             add_to_scatterplot(d)
         })
-    })
+    });
+    add_next(5500);
 }
 
 function show_screen_3() {
@@ -19,13 +21,14 @@ function show_screen_3() {
             draw_map(d, 3000, false)
             add_to_scatterplot(d)
         })
-    })
+    });
     setTimeout(function(){
         d3.json('/workout/22', function(d){
             draw_map(d, 5000, true, true)
             add_to_scatterplot(d, "19 km along the sea during storm")
         })
-    }, 3000)
+    }, 3000);
+    add_next(8500);
 }
 
 function show_screen_4(){
@@ -48,6 +51,7 @@ function show_screen_4(){
             })
         })
     }, 3000)
+    add_next(6500);
 }
 
 function show_screen_5(){
@@ -63,7 +67,8 @@ function show_screen_5(){
             draw_map(d, 3000, true, true)
             add_to_scatterplot(d,"Longest run during this training session" )
         })
-    }, 3000)
+    }, 3000);
+    add_next(6500);
 }
 function show_screen_6(){
     show_screen(6);
@@ -77,21 +82,24 @@ function show_screen_6(){
             }
         })
     })
+    add_next(3500);
+
 }
 function show_screen_7(){
     show_screen(7);
+    map.panTo(new L.LatLng(55.646098, 12.548337));
     [51,52,43,44,45].forEach(function(id){
         d3.json('/workout/' + id, function(d){
             draw_map(d, 3000, false);
             add_to_scatterplot(d);
         })
-    })
+    });
     setTimeout(function(){
         d3.json('/workout/54', function(d){
             draw_map(d, 5000, true, true);
             add_to_scatterplot(d, "Picturesque run along the sea shore in Malmo");
-        })
-    }, 3000)
+        });
+    }, 3000);
     setTimeout(function(){
         [46,47].forEach(function(id){
             d3.json('/workout/' + id, function(d){
@@ -99,7 +107,9 @@ function show_screen_7(){
                 add_to_scatterplot(d);
             });
         });
-    }, 2000)
+    }, 2000);
+    add_next(9000);
+
 }
 function show_screen_8(){
     show_screen(8);
@@ -108,5 +118,8 @@ function show_screen_8(){
         map.setZoom(13, {animate: true});
         draw_map(d, 10000, true, true);
         add_to_scatterplot(d, "Copenhagen marathon, May 24th, 2015");
-    })
+    });
+    setTimeout(function(){
+        $('#screen_content').append('<h1 id="theend">THE END</h1>')
+    }, 10000)
 }
