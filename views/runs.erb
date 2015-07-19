@@ -21,31 +21,42 @@
 <div id="tooltip"></div>
 <div id="screens">
     <div id="screen_1">
-        <p>In may I completed my second marathon. I ran 42K on a sunny day in Copenhagen.</p>
+        <p>In May 2015 I completed my second marathon. I ran 42 km on a sunny day in Copenhagen.</p>
+        <p>It was a fun run with lots of cheering and high fives.</p>
         <p>This is how I trained to complete it.</p>
     </div>
     <div id="screen_2">
-        <p>I started rather slow. I ran only around 6-7 km per run during my first week. First run that as longer than 10 km was during second week of training.</p>
+        <p>I started rather slow. I ran only around 6-7 km per run during my first week.  I ran familiar routes and focused on improving my tempo.</p>
+        <p>First run that as longer than 10 km was during second week of training.</p>
     </div>
     <div id="screen_3">
-        <p>Then I started interval trainings that were tough. I ran familiar routes this time and focusing on improving my tempo.</p>
-        <p>And then my toughest run happened: 20K along the sea during a storm. That was extreme!</p>
+        <p>And then my toughest run happened: 20 km along the sea during a storm. </p>
+        <p>That was extremely hard, but I did not have any other options but to finish the route since I ran in a remote area far from any public transportation.</p>
     </div>
     <div id="screen_4">
-        <p>I gradually increased my weekly distance and intervals. I ran 30+ km fot two consecutive days, and finally I broke 25 km. </p>
+        <p>I continued building up the distance. Longer runs lasting 1,5 hours or more stopped being a hard thing for me.</p>
+        <p>Tough thing I did was me running 30+ km for two consecutive days, and finally I broke 25 km on a single run. </p>
     </div>
     <div id="screen_5">
-        <p>Finally the 30 km run happened, which I survived. </p>
+        <p>I started running in new places: Slusseholmen, a new area in Copenhagen built in Venetian style and narrow dirt paths in large field called Amager Fælled.</p>
+        <p>Finally the 30 km run happened, which I survived.</p>
     </div>
     <div id="screen_6">
-        <p>Then I had a break and decided to take it easy. Also I started running slightly different routes.</p>
+        <p>Then I stopped running for a week, and after that I was back on track. I kept running in Slusseholmen and along the sea.</p>
+        <p>I also managed to reach fast speed on longer runs and broke personal record on 15 km. </p>
+    </div>
+    <div id="screen_7">
+        <p>Last couple of weeks before the marathon. My runs were calm and rather short, </p>
+        <p>longest was a bit over 13 km in Malmö with a good friend and a sauna after.</p>
     </div>
     <div id="screen_8">
-        <p>Last couple of weeks before the marathon. No longer runs and an off-site 13 km in Malmo with a friend.</p>
+        <p>Finally I ran marathon distance on 24th of May. I completed it slower than expected.</p>
+        <p>But I completed it all the same and slightly faster than my first marathon in Stockholm a year ago.</p>
     </div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="map.js"></script>
 <script src="helpers.js"></script>
 <script src="scatterplot.js"></script>
 <script src="screens.js"></script>
@@ -58,31 +69,11 @@
 
     var svg = d3.select("#map").select("svg"),
             g = svg.append("g");
-    var margin_scplt = {top: 5, right: 0, bottom: 25, left: 20}
-    var width = 400 - margin_scplt.left - margin_scplt.right,
-            height = 400 -  margin_scplt.top -  margin_scplt.bottom;
-    console.log(margin_scplt)
     var scatterplot = d3.select('#scatterplot').append('svg')
             .attr("width", width + margin_scplt['left'] + margin_scplt['right'])
             .attr("height", height + margin_scplt['top'] + margin_scplt['bottom'])
             .append("g")
             .attr("transform", "translate(" + margin_scplt.left + "," + margin_scplt.top + ")");
-
-    var x_scale_func = d3.scale.linear()
-            .range([0, width])
-            .domain([0,45]);
-
-    var y_scale_func = d3.scale.linear()
-            .range([height, 0])
-            .domain([9, 11.5]);
-
-    var x_axis = d3.svg.axis()
-            .scale(x_scale_func)
-            .orient("bottom");
-
-    var y_axis = d3.svg.axis()
-            .scale(y_scale_func)
-            .orient("left");
 
     scatterplot.append("g")
             .attr("class", "x axis")
@@ -102,13 +93,6 @@
     MAX_SCREENS = 8
     $(document).ready(function(){
          window["show_screen_" + SCREEN_NUMBER]()
-        $('body' ).click(function() {
-            if(SCREEN_NUMBER < MAX_SCREENS){
-                SCREEN_NUMBER +=1
-                window["show_screen_" + SCREEN_NUMBER]()
-            }
-
-        });
         $(document).keydown(function(e) {
             switch(e.which) {
                 case 37:

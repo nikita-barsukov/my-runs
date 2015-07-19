@@ -22,7 +22,7 @@ function show_screen_3() {
     })
     setTimeout(function(){
         d3.json('/workout/22', function(d){
-            draw_map(d, 5000, true)
+            draw_map(d, 5000, true, true)
             add_to_scatterplot(d, "19 km along the sea during storm")
         })
     }, 3000)
@@ -39,7 +39,7 @@ function show_screen_4(){
     setTimeout(function(){
         [30,31,32,23,25,25].forEach(function(id){
             d3.json('/workout/' + id, function(d){
-                draw_map(d, 3000, id ==25)
+                draw_map(d, 3000, id ==25, id ==25)
                 if(id!=25){
                     add_to_scatterplot(d)
                 } else {
@@ -60,7 +60,7 @@ function show_screen_5(){
     })
     setTimeout(function(){
         d3.json('/workout/34', function(d){
-            draw_map(d, 3000, true)
+            draw_map(d, 3000, true, true)
             add_to_scatterplot(d,"Longest run during this training session" )
         })
     }, 3000)
@@ -69,7 +69,7 @@ function show_screen_6(){
     show_screen(6);
     [35,53,36,37,38,49,50].forEach(function(id){
         d3.json('/workout/' + id, function(d){
-            draw_map(d, 3000, false)
+            draw_map(d, 3000, false, id == 37)
             if(id!=37){
                 add_to_scatterplot(d)
             } else {
@@ -82,33 +82,31 @@ function show_screen_7(){
     show_screen(7);
     [51,52,43,44,45].forEach(function(id){
         d3.json('/workout/' + id, function(d){
-            draw_map(d, 3000, false)
-            add_to_scatterplot(d)
+            draw_map(d, 3000, false);
+            add_to_scatterplot(d);
         })
     })
     setTimeout(function(){
         d3.json('/workout/54', function(d){
-            draw_map(d, 5000, true)
-            add_to_scatterplot(d, "Picturesque run along the sea shore in Malmo")
+            draw_map(d, 5000, true, true);
+            add_to_scatterplot(d, "Picturesque run along the sea shore in Malmo");
         })
     }, 3000)
     setTimeout(function(){
         [46,47].forEach(function(id){
             d3.json('/workout/' + id, function(d){
-                draw_map(d, 3000, id ==46)
-                add_to_scatterplot(d)
-            })
-        })
-    }, 8000)
+                draw_map(d, 3000, id ==46);
+                add_to_scatterplot(d);
+            });
+        });
+    }, 2000)
 }
 function show_screen_8(){
     show_screen(8);
     d3.json('/workout/48', function(d){
-        draw_map(d, 8000, true)
-        add_to_scatterplot(d, "Copenhagen marathon, May 24th, 2015")
-        map.panTo(new L.LatLng(55.646098, 12.558337))
-        map.setZoom(12, {animate: true})
+        map.panTo(new L.LatLng(55.646098, 12.558337));
+        map.setZoom(13, {animate: true});
+        draw_map(d, 10000, true, true);
+        add_to_scatterplot(d, "Copenhagen marathon, May 24th, 2015");
     })
-
 }
-

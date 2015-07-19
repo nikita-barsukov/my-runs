@@ -1,45 +1,24 @@
 
-function draw_map(d, t, pan){
-    gjson = JSON.parse(d['geojson'])
-    d3.selectAll("#path_" + d['id']).remove()
-    c = turf.centroid(gjson)['geometry']['coordinates'];
-    if(pan){
-        map.panTo(new L.LatLng(c[1], c[0]), {animate: true})
-    }
-    function transition(p) {
-        p.transition()
-            .duration(t)
-            .attrTween("stroke-dasharray", tweenDash)
-            .style("stroke-opacity", 0.4);
-    }
-
-    function tweenDash() {
-        var l = feature.node().getTotalLength();
-        var i = d3.interpolateString("0," + l, l + "," + l);
-        return function(t) {
-            return i(t)
-        }
-    }
-
-    var feature = g.append("path")
-        .datum(gjson)
-        .attr({
-            "id": "path_" + d['id'],
-            'class': 'route',
-            "d":path
-        })
-        .style("stroke-opacity", 1)
-        .call(transition);
-
-    map.on("viewreset", function() {
-        feature.attr({
-            "d":path,
-            "stroke-dasharray": ''
-        })
-    })
-}
-
 function show_screen(number) {
-    $("#screen_content").empty()
+    $("#screen_content").empty();
     $("#screen_content").html($("#screen_" + number).html());
 }
+var margin_scplt = {top: 5, right: 0, bottom: 25, left: 20}
+var width = 400 - margin_scplt.left - margin_scplt.right,
+    height = 400 -  margin_scplt.top -  margin_scplt.bottom;
+
+var x_scale_func = d3.scale.linear()
+    .range([0, width])
+    .domain([0,45]);
+
+var y_scale_func = d3.scale.linear()
+    .range([height, 0])
+    .domain([9, 12]);
+
+var x_axis = d3.svg.axis()
+    .scale(x_scale_func)
+    .orient("bottom");
+
+var y_axis = d3.svg.axis()
+    .scale(y_scale_func)
+    .orient("left");

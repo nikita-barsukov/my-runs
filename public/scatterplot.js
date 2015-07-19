@@ -15,7 +15,6 @@ function add_to_scatterplot(d, ttip_text) {
 
     if(ttip_text){
         var tooltip = d3.select("#tooltip")
-        console.log(circle)
         circle.on("mouseover", function(d){
             tooltip.html(ttip_text);
             tooltip.style({

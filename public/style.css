@@ -11,7 +11,6 @@ body { margin:0; padding:0; }
 }
 .route {
     fill:none;
-    stroke: red;
     stroke-width: 2px;
 }
 #tooltip {
