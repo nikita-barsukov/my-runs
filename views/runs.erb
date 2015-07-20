@@ -98,19 +98,19 @@
     scatterplot.append("g")
             .attr("class", "x axis")
             .attr("transform", "translate(" + margin_scplt.left + "," + (height + margin_scplt.top) + ")")
-            .call(x_axis)
+            .call(x_axis);
 
     scatterplot.append("g")
             .attr("class", "y axis")
             .call(y_axis)
-            .attr("transform", "translate(" + margin_scplt.left + "," + margin_scplt.top + ")")
+            .attr("transform", "translate(" + margin_scplt.left + "," + margin_scplt.top + ")");
 
     var path = d3.geo.path().projection(function(e) {
         var point = map.latLngToLayerPoint(new L.LatLng(e[1],e[0]));
         return [point.x,point.y];
     });
     SCREEN_NUMBER = 1;
-    MAX_SCREENS = 8
+    MAX_SCREENS = 8;
     $(document).ready(function(){
          window["show_screen_" + SCREEN_NUMBER]();
         $("progress").val(100 * SCREEN_NUMBER / MAX_SCREENS);

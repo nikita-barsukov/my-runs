@@ -18,13 +18,13 @@ function show_screen_3() {
     show_screen(3);
     [5,6,7,8,15,21].forEach(function(id){
         d3.json('/workout/' + id, function(d){
-            draw_map(d, 3000, false)
+            draw_map(d, 3000, false);
             add_to_scatterplot(d)
         })
     });
     setTimeout(function(){
         d3.json('/workout/22', function(d){
-            draw_map(d, 5000, true, true)
+            draw_map(d, 5000, true, true);
             add_to_scatterplot(d, "19 km along the sea during storm")
         })
     }, 3000);
@@ -35,14 +35,14 @@ function show_screen_4(){
     show_screen(4);
     [11,12,13,14,16,17,18,27].forEach(function(id){
         d3.json('/workout/' + id, function(d){
-            draw_map(d, 3000, id == 11)
+            draw_map(d, 3000, id == 11);
             add_to_scatterplot(d)
         })
     })
     setTimeout(function(){
         [30,31,32,23,25,25].forEach(function(id){
             d3.json('/workout/' + id, function(d){
-                draw_map(d, 3000, id ==25, id ==25)
+                draw_map(d, 3000, id ==25, id ==25);
                 if(id!=25){
                     add_to_scatterplot(d)
                 } else {
@@ -64,7 +64,7 @@ function show_screen_5(){
     })
     setTimeout(function(){
         d3.json('/workout/34', function(d){
-            draw_map(d, 3000, true, true)
+            draw_map(d, 3000, true, true);
             add_to_scatterplot(d,"Longest run during this training session" )
         })
     }, 3000);
