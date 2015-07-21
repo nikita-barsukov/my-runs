@@ -31,7 +31,9 @@
             </ul>
 
         </div>
-        <div id="screen_content"></div>
+        <div id="screen_content">
+            <div id="next"><a href="#">Next</a></div>
+        </div>
         <div id="scatterplot"></div>
     </div>
     <progress max="100" value="0"></progress>
@@ -114,6 +116,14 @@
     $(document).ready(function(){
          window["show_screen_" + SCREEN_NUMBER]();
         $("progress").val(100 * SCREEN_NUMBER / MAX_SCREENS);
+        $("#next").click(function(e){
+            if(SCREEN_NUMBER < MAX_SCREENS){
+                SCREEN_NUMBER = SCREEN_NUMBER + 1;
+                window["show_screen_" + SCREEN_NUMBER]();
+                $("progress").val(100 * SCREEN_NUMBER / MAX_SCREENS);
+            }
+            e.preventDefault();
+        });
         $(document).keydown(function(e) {
             switch(e.which) {
                 case 37:

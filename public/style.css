@@ -26,7 +26,6 @@ body { margin:0; padding:0; }
 #legend {
     top: 0%;
     left: 3%;
-    /*transform: translate(-80%, -80%);*/
     width: 420px;
     position: absolute;
     z-index: 1000;
@@ -42,11 +41,10 @@ body { margin:0; padding:0; }
     padding: 5px;
     margin: 5px;
     background-color: white;
-
 }
 
 #screen_content {
-    height: 180px;
+    height: 200px;
 }
 
 progress{
@@ -82,6 +80,10 @@ progress{
 h1, h2, h3, h4 {
     font-family:'Pontif LP W01 Regular', serif;
 }
-p, li {
+p, li, text {
     font-family: 'Verdana', sans-serif;
+}
+
+#next{
+    display: none
 }
