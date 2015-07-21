@@ -46,7 +46,7 @@ function show_screen_4(){
                 if(id!=25){
                     add_to_scatterplot(d)
                 } else {
-                    add_to_scatterplot(d,"25 km run with desent speed and BBC Essential mixes playing in headphones." )
+                    add_to_scatterplot(d,"25 km run with decent speed EDM playing in headphones." )
                 }
             })
         })
@@ -120,6 +120,9 @@ function show_screen_8(){
         add_to_scatterplot(d, "Copenhagen marathon, May 24th, 2015");
     });
     setTimeout(function(){
-        $('#screen_content').append('<h1 id="theend">THE END</h1>')
+        $('#screen_content').append('<h3>The end. Share this:</h3>' +
+            '<a href="http://www.facebook.com/sharer/sharer.php?u=http://runs.barsukov.net"><i class="fa fa-facebook fa-2x"></i></a>' +
+            '<a href="http://twitter.com/home?status=How I prepared for Copenhagen Marathon+http://runs.barsukov.net"><i class="fa fa-twitter fa-2x"></i></a>'+
+            '<a href="https://plus.google.com/share?url=http://runs.barsukov.net"><i class="fa fa-google-plus fa-2x"></i></a>')
     }, 10000)
 }

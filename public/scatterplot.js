@@ -11,7 +11,7 @@ function add_to_scatterplot(d, ttip_text) {
         .duration(2000)
         .attr({
             'fill': fill_color
-        })
+        });
 
     if(ttip_text){
         var tooltip = d3.select("#tooltip")

@@ -6,7 +6,7 @@ body { margin:0; padding:0; }
     stroke: #000;
     shape-rendering: crispEdges;
 }
-.tick text{
+.tick text, .axis text{
     font-size: 8pt;
 }
 .route {
@@ -46,6 +46,10 @@ body { margin:0; padding:0; }
 #screen_content {
     height: 200px;
 }
+#screen_content i{
+    display: inline-block;
+    margin-right: 5px;
+}
 
 progress{
     position: absolute;
@@ -80,7 +84,7 @@ progress{
 h1, h2, h3, h4 {
     font-family:'Pontif LP W01 Regular', serif;
 }
-p, li, text {
+p, li, text, a {
     font-family: 'Verdana', sans-serif;
 }
 

@@ -3,13 +3,16 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>How I ran to prepare to Copenhagen Marathon on May 24, 2015</title>
+    <title>How I ran to prepare to Copenhagen Marathon</title>
     <meta name="author" content="Nikita Barsukov">
-    <meta name=”description” content='Animation of my running routes during my preparation to Copenhagen Marathon'>
-    <meta property=”og:title” content="How I ran to prepare to Copenhagen Marathon"/>
+    <meta name=”description” content='Animation of my running routes during my preparation to Copenhagen Marathon  on May 24, 2015'>
+    <meta property=”og:title” content="Preparation to Copenhagen Marathon"/>
     <meta property=”og:type” content="article"/>
+    <meta property="og:image" content="http://i.imgur.com/baMVhKO.png" />
     <meta property=”og:description” content="Animation of my running routes during my preparation to Copenhagen Marathon"/>
     <meta name='twitter:card' content='summary'>
+    <meta name="twitter:image" content="http://i.imgur.com/baMVhKO.png">
+    <meta name="twitter:creator" content="@n_barsukov">
     <meta name='twitter:title' content="How I ran to prepare to Copenhagen Marathon">
     <meta name="twitter:description" content="Animation of my running routes during my preparation to Copenhagen Marathon">
     <script src="d3.min.js"></script>
@@ -17,6 +20,7 @@
     <script src="turf.min.js"></script>
     <script src="queue.v1.min.js"></script>
     <link href='https://api.tiles.mapbox.com/mapbox.js/v2.2.1/mapbox.css' rel='stylesheet' />
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link href="http://fast.fonts.net/cssapi/b7310ad5-5ffb-4ab3-8ec5-7fc0a70e6421.css" type="text/css" rel="stylesheet" />
     <link href="style.css" rel="stylesheet" />
 </head>
@@ -72,8 +76,7 @@
         <p>longest was a bit over 13 km in Malmö with a good friend and a sauna after.</p>
     </div>
     <div id="screen_8">
-        <p>Finally I ran marathon distance on 24th of May. I completed it slower than expected.</p>
-        <p>But I completed it all the same and slightly faster than my first marathon in Stockholm a year ago.</p>
+        <p>Finally I ran marathon distance on 24th of May. I completed it slower than expected. But I completed it all the same and slightly faster than my first marathon in Stockholm a year ago.</p>
     </div>
 </div>
 
@@ -100,12 +103,22 @@
     scatterplot.append("g")
             .attr("class", "x axis")
             .attr("transform", "translate(" + margin_scplt.left + "," + (height + margin_scplt.top) + ")")
-            .call(x_axis);
+            .call(x_axis)
+            .append("text")
+            .attr("x", width/2-50)
+            .attr("y", -margin_scplt.top + margin_scplt.bottom)
+            .text("Distance, km");
 
     scatterplot.append("g")
             .attr("class", "y axis")
             .call(y_axis)
-            .attr("transform", "translate(" + margin_scplt.left + "," + margin_scplt.top + ")");
+            .attr("transform", "translate(" + margin_scplt.left + "," + margin_scplt.top + ")")
+            .append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 6)
+            .attr("dy", ".71em")
+            .style("text-anchor", "end")
+            .text("Average speed, km/h");
 
     var path = d3.geo.path().projection(function(e) {
         var point = map.latLngToLayerPoint(new L.LatLng(e[1],e[0]));
@@ -145,10 +158,7 @@
                 default: return;
             }
         });
-
     })
 </script>
 </body>
 </html>
-
-

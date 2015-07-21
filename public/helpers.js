@@ -4,9 +4,9 @@ function show_screen(number) {
     $("#screen_content p").remove();
     $("#screen_content").prepend($("#screen_" + number).html());
 }
-var margin_scplt = {top: 5, right: 0, bottom: 25, left: 20}
+var margin_scplt = {top: 5, right: 0, bottom: 35, left: 20}
 var width = 400 - margin_scplt.left - margin_scplt.right,
-    height = 400 -  margin_scplt.top -  margin_scplt.bottom;
+    height = 300 -  margin_scplt.top -  margin_scplt.bottom;
 
 var x_scale_func = d3.scale.linear()
     .range([0, width])
